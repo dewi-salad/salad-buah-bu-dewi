@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salad Buah Bu Dewi — Segar, Lezat & Sehat</title>
+<link rel="icon" href="/images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5F9FA;
+    --card:#FFFFFF;
+    --ink:#2D1B33;
+    --ink-soft:#6b5a70;
+    --strawberry:#E0435A;
+    --mango:#F2A63D;
+    --grape:#7B3F72;
+    --kiwi:#5E9A46;
+    --sky:#4FB3D9;
+    --line: rgba(45,27,51,0.10);
+    --shadow: 0 10px 30px rgba(45,27,51,0.08);
+    --radius-lg: 28px;
+    --radius-md: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    line-height:1.05;
+    margin:0;
+  }
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* Decorative fruit dots */
+  .dot{
+    display:inline-block;
+    width:8px; height:8px;
+    border-radius:50%;
+    margin:0 2px;
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(245,249,250,0.85);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 24px;
+    max-width:1180px; margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+  }
+  .brand img{
+    width:52px; height:52px; border-radius:50%;
+    box-shadow:0 4px 14px rgba(45,27,51,0.15);
+  }
+  .brand-name{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1.15rem;
+    color:var(--grape);
+  }
+  .brand-tag{
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    font-weight:600;
+    letter-spacing:0.02em;
+  }
+  .nav-cta{
+    background:var(--strawberry);
+    color:white;
+    padding:10px 20px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:0.9rem;
+    text-decoration:none;
+    box-shadow:0 6px 16px rgba(224,67,90,0.35);
+    white-space:nowrap;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:56px 0 40px;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:48px;
+    align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:white;
+    border:1px solid var(--line);
+    padding:7px 16px 7px 8px;
+    border-radius:999px;
+    font-size:0.8rem;
+    font-weight:600;
+    color:var(--grape);
+    box-shadow:var(--shadow);
+    margin-bottom:22px;
+  }
+  .eyebrow .fr{font-size:1rem;}
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    color:var(--ink);
+  }
+  .hero h1 .accent{color:var(--strawberry);}
+  .hero h1 .accent2{color:var(--kiwi);}
+  .hero p.lede{
+    margin-top:20px;
+    font-size:1.08rem;
+    color:var(--ink-soft);
+    max-width:480px;
+    line-height:1.6;
+  }
+  .hero-ctas{
+    margin-top:32px;
+    display:flex; gap:14px; flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--strawberry);
+    color:white;
+    padding:16px 28px;
+    border-radius:999px;
+    font-weight:700;
+    text-decoration:none;
+    display:inline-flex; align-items:center; gap:10px;
+    box-shadow:0 10px 24px rgba(224,67,90,0.35);
+    transition:transform 0.15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-secondary{
+    background:white;
+    color:var(--ink);
+    padding:16px 24px;
+    border-radius:999px;
+    font-weight:700;
+    text-decoration:none;
+    border:1.5px solid var(--line);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .hero-stats{
+    display:flex; gap:28px;
+    margin-top:38px;
+    flex-wrap:wrap;
+  }
+  .stat b{
+    display:block;
+    font-family:'Baloo 2', sans-serif;
+    font-size:1.5rem;
+    color:var(--grape);
+  }
+  .stat span{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    font-weight:600;
+  }
+
+  .hero-visual{
+    position:relative;
+  }
+  .hero-visual .frame{
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:0 24px 50px rgba(45,27,51,0.22);
+    transform:rotate(2deg);
+    border:6px solid white;
+  }
+  .hero-visual .badge{
+    position:absolute;
+    bottom:-18px; left:-18px;
+    background:var(--kiwi);
+    color:white;
+    padding:14px 20px;
+    border-radius:var(--radius-md);
+    font-family:'Baloo 2';
+    font-weight:700;
+    box-shadow:0 12px 24px rgba(94,154,70,0.4);
+    transform:rotate(-4deg);
+    font-size:0.95rem;
+  }
+
+  /* ---------- SECTION HEADS ---------- */
+  .section{padding:64px 0;}
+  .section-head{
+    max-width:640px;
+    margin:0 auto 44px;
+    text-align:center;
+  }
+  .section-head .kicker{
+    font-weight:700;
+    color:var(--strawberry);
+    font-size:0.82rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:10px;
+  }
+  .section-head h2{
+    font-size:clamp(1.7rem,3.4vw,2.4rem);
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    margin-top:12px;
+    line-height:1.6;
+  }
+
+  /* ---------- MENU / CUP CARDS ---------- */
+  .menu-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+  }
+  .cup-card{
+    background:var(--card);
+    border-radius:var(--radius-lg);
+    padding:26px 20px 22px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+    position:relative;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .cup-card:hover{transform:translateY(-6px); box-shadow:0 18px 36px rgba(45,27,51,0.14);}
+  .cup-card.custom{
+    background:linear-gradient(160deg, #fff 60%, #FBEFE0 100%);
+    border-color:rgba(242,166,61,0.35);
+  }
+  .cup-svg{margin-bottom:14px;}
+  .cup-vol{
+    font-weight:700;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+  }
+  .cup-price{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:1.5rem;
+    color:var(--grape);
+    margin-top:6px;
+  }
+  .cup-price small{
+    font-size:0.85rem;
+    font-weight:500;
+    color:var(--ink-soft);
+  }
+  .cup-note{
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-top:8px;
+    line-height:1.4;
+  }
+  .cup-select{
+    margin-top:16px;
+    border:1.5px solid var(--line);
+    background:white;
+    color:var(--ink);
+    font-weight:700;
+    padding:9px 18px;
+    border-radius:999px;
+    font-size:0.85rem;
+    cursor:pointer;
+    font-family:inherit;
+    transition:.15s;
+  }
+  .cup-select:hover{border-color:var(--strawberry); color:var(--strawberry);}
+  .cup-select.active{background:var(--strawberry); color:white; border-color:var(--strawberry);}
+
+  .menu-footnote{
+    text-align:center;
+    margin-top:28px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    background:white;
+    border:1px dashed var(--line);
+    border-radius:var(--radius-md);
+    padding:16px 20px;
+    max-width:720px;
+    margin-left:auto; margin-right:auto;
+  }
+  .menu-footnote b{color:var(--grape);}
+
+  /* ---------- CAROUSEL ---------- */
+  .carousel{
+    position:relative;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .carousel-viewport{
+    overflow:hidden;
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);
+  }
+  .carousel-track{
+    display:flex;
+    transition:transform 0.45s cubic-bezier(.4,0,.2,1);
+  }
+  .carousel-slide{
+    flex:0 0 100%;
+    aspect-ratio:1/1;
+  }
+  .carousel-slide img{
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .carousel-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:44px; height:44px;
+    border-radius:50%;
+    border:none;
+    background:white;
+    color:var(--grape);
+    font-size:1.6rem;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 8px 20px rgba(45,27,51,0.2);
+    display:flex; align-items:center; justify-content:center;
+    z-index:2;
+  }
+  .carousel-btn:hover{background:var(--strawberry); color:white;}
+  .carousel-btn.prev{left:-14px;}
+  .carousel-btn.next{right:-14px;}
+  .carousel-dots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:18px;
+  }
+  .carousel-dot{
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--line);
+    border:none;
+    cursor:pointer;
+    padding:0;
+    transition:background .2s, transform .2s;
+  }
+  .carousel-dot.active{
+    background:var(--strawberry);
+    transform:scale(1.25);
+  }
+  @media (max-width:560px){
+    .carousel-btn.prev{left:6px;}
+    .carousel-btn.next{right:6px;}
+  }
+
+  /* ---------- ORDER FORM ---------- */
+  .order-panel{
+    background:var(--grape);
+    border-radius:var(--radius-lg);
+    padding:44px;
+    color:white;
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    gap:40px;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .order-panel::after{
+    content:"";
+    position:absolute;
+    right:-60px; top:-60px;
+    width:220px; height:220px;
+    background:radial-gradient(circle, rgba(255,255,255,0.14), transparent 70%);
+    border-radius:50%;
+  }
+  .order-copy h2{color:white; font-size:1.9rem;}
+  .order-copy p{color:rgba(255,255,255,0.82); margin-top:14px; line-height:1.65;}
+  .order-copy .mini-list{margin-top:22px; display:flex; flex-direction:column; gap:10px;}
+  .order-copy .mini-list div{
+    display:flex; align-items:center; gap:10px;
+    font-size:0.92rem;
+    color:rgba(255,255,255,0.92);
+  }
+  .order-copy .mini-list .ic{
+    width:26px; height:26px; border-radius:50%;
+    background:rgba(255,255,255,0.18);
+    display:flex; align-items:center; justify-content:center;
+    font-size:0.8rem; flex-shrink:0;
+  }
+  .payment-box{
+    margin-top:26px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.22);
+    border-radius:var(--radius-md);
+    padding:18px 20px;
+  }
+  .payment-title{
+    font-family:'Baloo 2';
+    font-weight:700;
+    font-size:0.98rem;
+    margin-bottom:10px;
+    color:white;
+  }
+  .payment-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:0.9rem;
+    color:rgba(255,255,255,0.92);
+  }
+  .payment-row b{
+    font-family:'JetBrains Mono';
+    font-weight:700;
+    letter-spacing:0.02em;
+  }
+  .payment-sub{
+    font-size:0.78rem;
+    color:rgba(255,255,255,0.65);
+    margin-top:2px;
+  }
+
+  .order-form{
+    background:white;
+    border-radius:var(--radius-md);
+    padding:26px;
+    color:var(--ink);
+    box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  }
+  .field{margin-bottom:16px;}
+  .field label{
+    font-size:0.82rem;
+    font-weight:700;
+    color:var(--ink-soft);
+    display:block;
+    margin-bottom:7px;
+  }
+  .field select, .field textarea, .field input{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+    font-family:inherit;
+    font-size:0.95rem;
+    color:var(--ink);
+    background:var(--cream);
+  }
+  .field textarea{resize:vertical; min-height:64px;}
+  .qty-row{
+    display:flex; align-items:center; gap:12px;
+  }
+  .qty-btn{
+    width:38px; height:38px;
+    border-radius:10px;
+    border:1.5px solid var(--line);
+    background:var(--cream);
+    font-size:1.1rem;
+    font-weight:700;
+    cursor:pointer;
+    color:var(--grape);
+  }
+  .qty-val{
+    font-family:'JetBrains Mono';
+    font-weight:700;
+    font-size:1.1rem;
+    min-width:28px;
+    text-align:center;
+  }
+  .order-summary{
+    background:var(--cream);
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-family:'JetBrains Mono';
+  }
+  .order-summary span{font-size:0.8rem; color:var(--ink-soft); font-family:'Plus Jakarta Sans'; font-weight:600;}
+  .order-summary b{font-size:1.2rem; color:var(--strawberry);}
+  .btn-wa{
+    width:100%;
+    background:#25D366;
+    color:white;
+    border:none;
+    padding:16px;
+    border-radius:12px;
+    font-weight:700;
+    font-size:1rem;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    box-shadow:0 10px 22px rgba(37,211,102,0.35);
+    font-family:inherit;
+  }
+  .btn-wa:hover{filter:brightness(1.04);}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:40px 0 30px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:0.85rem;
+  }
+  footer .fbrand{
+    font-family:'Baloo 2';
+    font-weight:700;
+    color:var(--grape);
+    font-size:1.1rem;
+    margin-bottom:6px;
+  }
+  footer a.wa-link{
+    color:var(--strawberry);
+    font-weight:700;
+    text-decoration:none;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1;}
+    .menu-grid{grid-template-columns:repeat(2,1fr);}
+    .order-panel{grid-template-columns:1fr; padding:28px;}
+  }
+  @media (max-width:560px){
+    .menu-grid{grid-template-columns:1fr 1fr;}
+    .brand-tag{display:none;}
+    .nav-cta{padding:9px 14px; font-size:0.8rem;}
+    .hero{padding:36px 0 24px;}
+  }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline:3px solid var(--sky);
+    outline-offset:2px;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <img src="/images/logo.png" alt="Logo Salad Buah Bu Dewi">
+      <div>
+        <div class="brand-name">Salad Buah Bu Dewi</div>
+        <div class="brand-tag">Segar, Lezat &amp; Sehat!</div>
+      </div>
+    </div>
+    <a class="nav-cta" href="#pesan">Pesan Sekarang</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow"><span class="fr">🍓</span> PO dibuka setiap Selasa &amp; Jumat — Tasikmalaya</div>
+      <div style="margin-bottom:22px; margin-top:-14px;">
+        <a href="https://instagram.com/dewi_salad" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; font-weight:700; color:var(--grape); text-decoration:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/></svg>
+          @dewi_salad
+        </a>
+      </div>
+      <h1>Salad buah segar,<br><span class="accent">dibuat</span> sepenuh <span class="accent2">hati</span>.</h1>
+      <p class="lede">Racikan buah pilihan, susu &amp; keju lembut dalam kemasan cup rapi. Cocok untuk cemilan harian, arisan, acara kantor, sampai hampers keluarga.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="#pesan">🛒 Pesan via WhatsApp</a>
+        <a class="btn-secondary" href="#menu">Lihat Menu &amp; Harga</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>4 Ukuran</b><span>200ml – 3000ml</span></div>
+        <div class="stat"><b>100% Segar</b><span>Dipotong harian</span></div>
+        <div class="stat"><b>Custom Request</b><span>Pisah keju/mayones</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="frame"><img src="/images/gallery/hero2.jpg" alt="Cup salad buah Bu Dewi tersusun rapi"></div>
+      <div class="badge">Made with Love 💜</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Menu &amp; Harga</span>
+      <h2>Pilih ukuran sesuai kebutuhanmu</h2>
+      <p>Semua ukuran pakai topping lengkap yang sama — beda cup, beda porsi kebahagiaan.</p>
+    </div>
+
+    <div class="menu-grid">
+      <!-- 200ml -->
+      <div class="cup-card">
+        <svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 14 L46 14 L41 60 Q28 66 15 60 Z" fill="#FFFFFF" stroke="#E0435A" stroke-width="2.5"/>
+          <path d="M12 30 L44 30 L41 60 Q28 66 15 60 Z" fill="#E0435A" fill-opacity="0.18"/>
+          <ellipse cx="28" cy="14" rx="18" ry="4" fill="none" stroke="#E0435A" stroke-width="2.5"/>
+        </svg>
+        <div class="cup-vol">Cup 200 ml</div>
+        <div class="cup-price">Rp18<small>rb</small></div>
+        <div class="cup-note">Pas untuk cemilan pribadi<br><b style="color:var(--strawberry);">Min. order 3 pax</b></div>
+        <button class="cup-select" data-size="Cup 200ml" data-price="18000">Pilih</button>
+      </div>
+
+      <!-- 750ml -->
+      <div class="cup-card">
+        <svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 8 L49 8 L43 62 Q28 68 13 62 Z" fill="#FFFFFF" stroke="#F2A63D" stroke-width="2.5"/>
+          <path d="M9 20 L47 20 L43 62 Q28 68 13 62 Z" fill="#F2A63D" fill-opacity="0.2"/>
+          <ellipse cx="28" cy="8" rx="21" ry="4.5" fill="none" stroke="#F2A63D" stroke-width="2.5"/>
+        </svg>
+        <div class="cup-vol">Cup 750 ml</div>
+        <div class="cup-price">Rp55<small>rb</small></div>
+        <div class="cup-note">Cocok berdua atau bertiga</div>
+        <button class="cup-select" data-size="Cup 750ml" data-price="55000">Pilih</button>
+      </div>
+
+      <!-- 1000ml -->
+      <div class="cup-card">
+        <svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 5 L51 5 L44 63 Q28 70 12 63 Z" fill="#FFFFFF" stroke="#5E9A46" stroke-width="2.5"/>
+          <path d="M7 16 L49 16 L44 63 Q28 70 12 63 Z" fill="#5E9A46" fill-opacity="0.2"/>
+          <ellipse cx="28" cy="5" rx="23" ry="5" fill="none" stroke="#5E9A46" stroke-width="2.5"/>
+        </svg>
+        <div class="cup-vol">Cup 1000 ml</div>
+        <div class="cup-price">Rp65<small>rb</small></div>
+        <div class="cup-note">Untuk keluarga kecil</div>
+        <button class="cup-select" data-size="Cup 1000ml" data-price="65000">Pilih</button>
+      </div>
+
+      <!-- Custom -->
+      <div class="cup-card custom">
+        <svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 3 L53 3 L45 65 Q28 72 11 65 Z" fill="#FFFFFF" stroke="#7B3F72" stroke-width="2.5"/>
+          <path d="M5 12 L51 12 L45 65 Q28 72 11 65 Z" fill="#7B3F72" fill-opacity="0.18"/>
+          <ellipse cx="28" cy="3" rx="25" ry="5.5" fill="none" stroke="#7B3F72" stroke-width="2.5"/>
+        </svg>
+        <div class="cup-vol">Cup 2000 / 2500 / 3000 ml</div>
+        <div class="cup-price" style="font-size:1.1rem;">Orderan Khusus</div>
+        <div class="cup-note">Untuk acara/arisan besar — harga &amp; ketersediaan konfirmasi via WA</div>
+        <button class="cup-select" data-size="Cup Custom (2000/2500/3000ml)" data-price="0">Tanya Harga</button>
+      </div>
+    </div>
+
+    <div class="menu-footnote">
+      <b>Catatan:</b> Mau topping keju atau mayones dipisah (untuk member yang request khusus)? Bisa banget — harganya menyesuaikan, tinggal tulis di catatan pesanan atau chat langsung ke WhatsApp.<br><br>
+      <b>Cup 200 ml:</b> minimal order 3 pax.<br>
+      <b>Ongkos kirim:</b> Rp5.000 (dalam kota/dekat) — Rp10.000 (area lebih jauh).
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">Galeri</span>
+      <h2>Segar &amp; cantik, siap difoto sebelum disantap 📸</h2>
+    </div>
+    <div class="carousel" id="carousel">
+      <div class="carousel-viewport">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide"><img src="/images/gallery/hero1.jpg" alt="Cup salad buah dengan topping strawberry, anggur, dan mangga"></div>
+          <div class="carousel-slide"><img src="/images/gallery/hero2.jpg" alt="Cup salad buah tersusun di atas meja kayu"></div>
+          <div class="carousel-slide"><img src="/images/gallery/hero3.jpg" alt="Salad buah kotak dengan hiasan buah kiwi dan anggur"></div>
+          <div class="carousel-slide"><img src="/images/gallery/hero4.jpg" alt="Salad buah kotak siap antar"></div>
+        </div>
+      </div>
+      <button class="carousel-btn prev" id="carouselPrev" aria-label="Sebelumnya">‹</button>
+      <button class="carousel-btn next" id="carouselNext" aria-label="Selanjutnya">›</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+    <div style="text-align:center; margin-top:18px;">
+      <a href="https://instagram.com/dewi_salad" target="_blank" rel="noopener" style="font-size:0.88rem; font-weight:700; color:var(--grape); text-decoration:none;">
+        Lihat lebih banyak di Instagram @dewi_salad →
+      </a>
+    </div>
+
+    <div id="igWidgetContainer" style="margin-top:32px;"></div>
+  </div>
+</section>
+
+<section class="section" id="pesan">
+  <div class="wrap">
+    <div class="order-panel">
+      <div class="order-copy">
+        <h2>Yuk, pesan hari ini!</h2>
+        <p>Pilih ukuran, tambahkan catatan kalau ada request khusus, lalu kirim langsung ke WhatsApp Bu Dewi. Gampang, cepat, nggak perlu app tambahan.</p>
+        <div class="mini-list">
+          <div><span class="ic">✅</span> Konfirmasi & pembayaran langsung via chat</div>
+          <div><span class="ic">🎉</span> Cocok untuk arisan, acara kantor &amp; gereja</div>
+          <div><span class="ic">🧀</span> Bisa request topping dipisah</div>
+        </div>
+        <div class="payment-box">
+          <div class="payment-title">💳 Metode Pembayaran</div>
+          <div class="payment-row"><span>Transfer BCA</span><b>0541018289</b></div>
+          <div class="payment-sub">a.n. Suminto</div>
+          <div class="payment-row" style="margin-top:8px;"><span>COD</span><b>Bayar di tempat</b></div>
+        </div>
+      </div>
+
+      <div class="order-form">
+        <div class="field">
+          <label for="size">Ukuran Cup</label>
+          <select id="size">
+            <option value="Cup 200ml|18000">Cup 200 ml — Rp18.000</option>
+            <option value="Cup 750ml|55000">Cup 750 ml — Rp55.000</option>
+            <option value="Cup 1000ml|65000">Cup 1000 ml — Rp65.000</option>
+            <option value="Cup Custom (2000/2500/3000ml)|0">Cup 2000/2500/3000 ml — Orderan Khusus</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Jumlah</label>
+          <div class="qty-row">
+            <button class="qty-btn" id="qtyMinus" type="button" aria-label="Kurangi jumlah">−</button>
+            <div class="qty-val" id="qtyVal">1</div>
+            <button class="qty-btn" id="qtyPlus" type="button" aria-label="Tambah jumlah">+</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="notes">Catatan (opsional)</label>
+          <textarea id="notes" placeholder="Contoh: keju dipisah, alamat antar, tanggal ambil, dll."></textarea>
+        </div>
+        <div class="order-summary">
+          <span>Perkiraan total</span>
+          <b id="totalPrice">Rp18.000</b>
+        </div>
+        <div style="font-size:0.75rem; color:var(--ink-soft); margin-top:-10px; margin-bottom:16px;">*Belum termasuk ongkos kirim. Cup 200ml minimal 3 pax.</div>
+        <button class="btn-wa" id="sendWa" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.3 1.5.2 2-.1.6-.4 1.8-1.2 2.1-1.5.3-.3.3-.7.2-1z" fill="white"/>
+          <path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3C4 14.9 3.6 13.4 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20 12 20z" fill="white"/>
+          </svg>
+          Kirim Pesanan ke WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fbrand">Salad Buah Bu Dewi</div>
+  <div>Segar, Lezat &amp; Sehat — Tasikmalaya</div>
+  <div style="margin-top:8px;">WhatsApp: <a class="wa-link" href="https://wa.me/6281396014767" target="_blank" rel="noopener">0813-9601-4767</a></div>
+  <div style="margin-top:6px;">Instagram: <a class="wa-link" href="https://instagram.com/dewi_salad" target="_blank" rel="noopener">@dewi_salad</a></div>
+</footer>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+
+<script>
+  const WA_NUMBER = "6281396014767";
+  const sizeSelect = document.getElementById('size');
+  const qtyVal = document.getElementById('qtyVal');
+  const totalPrice = document.getElementById('totalPrice');
+  const notes = document.getElementById('notes');
+  let qty = 1;
+
+  function getMinQty(){
+    return sizeSelect.value.startsWith('Cup 200ml') ? 3 : 1;
+  }
+
+  function formatRupiah(n){
+    return "Rp" + n.toLocaleString('id-ID');
+  }
+
+  function updateTotal(){
+    const min = getMinQty();
+    if(qty < min){
+      qty = min;
+      qtyVal.textContent = qty;
+    }
+    const [label, priceStr] = sizeSelect.value.split('|');
+    const price = parseInt(priceStr, 10);
+    if(price === 0){
+      totalPrice.textContent = "Konfirmasi via WA";
+    } else {
+      totalPrice.textContent = formatRupiah(price * qty);
+    }
+  }
+
+  document.getElementById('qtyPlus').addEventListener('click', () => {
+    qty = Math.min(qty + 1, 50);
+    qtyVal.textContent = qty;
+    updateTotal();
+  });
+  document.getElementById('qtyMinus').addEventListener('click', () => {
+    const min = getMinQty();
+    qty = Math.max(qty - 1, min);
+    qtyVal.textContent = qty;
+    updateTotal();
+  });
+  sizeSelect.addEventListener('change', updateTotal);
+
+  // Cup card quick-select buttons scroll to order panel + set select
+  document.querySelectorAll('.cup-select').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const size = btn.getAttribute('data-size');
+      const price = btn.getAttribute('data-price');
+      for(const opt of sizeSelect.options){
+        if(opt.value.startsWith(size + "|")){
+          sizeSelect.value = opt.value;
+          break;
+        }
+      }
+      updateTotal();
+      document.getElementById('pesan').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+
+  document.getElementById('sendWa').addEventListener('click', () => {
+    const [label] = sizeSelect.value.split('|');
+    const note = notes.value.trim();
+    let msg = `Halo Bu Dewi, saya mau pesan:\n`;
+    msg += `- Ukuran: ${label}\n`;
+    msg += `- Jumlah: ${qty}\n`;
+    if(note){
+      msg += `- Catatan: ${note}\n`;
+    }
+    msg += `\nMohon info ketersediaan & totalnya ya. Terima kasih!`;
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  });
+
+  updateTotal();
+
+  // ---------- Carousel (dinamis dari content/gallery.json) ----------
+  (function(){
+    const track = document.getElementById('carouselTrack');
+    const dotsWrap = document.getElementById('carouselDots');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    let index = 0;
+    let autoplayTimer;
+    let slideCount = 0;
+
+    function youtubeEmbedUrl(url){
+      const m = url.match(/(?:youtu\.be\/|v=|embed\/)([a-zA-Z0-9_-]{11})/);
+      const id = m ? m[1] : '';
+      return `https://www.youtube.com/embed/${id}`;
+    }
+
+    function renderSlides(items){
+      track.innerHTML = '';
+      dotsWrap.innerHTML = '';
+      items.forEach((item, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        if(item.type === 'Video' && item.video_url){
+          if(/youtu\.?be/.test(item.video_url)){
+            slide.innerHTML = `<iframe src="${youtubeEmbedUrl(item.video_url)}" style="width:100%;height:100%;border:0;" allow="autoplay; encrypted-media" allowfullscreen title="${item.caption||'Video Salad Buah Bu Dewi'}"></iframe>`;
+          } else {
+            slide.innerHTML = `<video src="${item.video_url}" controls style="width:100%;height:100%;object-fit:cover;"></video>`;
+          }
+        } else if(item.image){
+          slide.innerHTML = `<img src="${item.image}" alt="${item.caption || 'Salad Buah Bu Dewi'}">`;
+        }
+        track.appendChild(slide);
+
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Slide ' + (i+1));
+        dot.addEventListener('click', () => { goTo(i); resetAutoplay(); });
+        dotsWrap.appendChild(dot);
+      });
+      slideCount = items.length;
+      index = 0;
+      track.style.transform = 'translateX(0%)';
+    }
+
+    function goTo(i){
+      if(slideCount === 0) return;
+      index = (i + slideCount) % slideCount;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dotsWrap.querySelectorAll('.carousel-dot').forEach((d, di) => d.classList.toggle('active', di === index));
+    }
+    function next(){ goTo(index + 1); }
+    function prev(){ goTo(index - 1); }
+
+    nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
+    prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
+
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+    track.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if(Math.abs(diff) > 40){
+        diff < 0 ? next() : prev();
+        resetAutoplay();
+      }
+    }, {passive:true});
+
+    function startAutoplay(){
+      clearInterval(autoplayTimer);
+      autoplayTimer = setInterval(next, 4500);
+    }
+    function resetAutoplay(){ startAutoplay(); }
+
+    fetch('content/gallery.json')
+      .then(r => r.json())
+      .then(data => {
+        renderSlides(data.items || []);
+        startAutoplay();
+      })
+      .catch(() => { startAutoplay(); }); // fallback: pakai slide statis yang sudah ada di HTML
+
+    fetch('content/settings.json')
+      .then(r => r.json())
+      .then(data => {
+        if(data.instagram_embed && data.instagram_embed.trim()){
+          document.getElementById('igWidgetContainer').innerHTML = data.instagram_embed;
+        }
+      })
+      .catch(() => {});
+  })();
+</script>
+
+</body>
+</html>

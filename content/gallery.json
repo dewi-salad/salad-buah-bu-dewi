@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "type": "Foto",
+      "image": "/images/gallery/hero1.jpg",
+      "caption": "Cup salad buah dengan topping strawberry, anggur, dan mangga"
+    },
+    {
+      "type": "Foto",
+      "image": "/images/gallery/hero2.jpg",
+      "caption": "Cup salad buah tersusun di atas meja kayu"
+    },
+    {
+      "type": "Foto",
+      "image": "/images/gallery/hero3.jpg",
+      "caption": "Salad buah kotak dengan hiasan buah kiwi dan anggur"
+    },
+    {
+      "type": "Foto",
+      "image": "/images/gallery/hero4.jpg",
+      "caption": "Salad buah kotak siap antar"
+    }
+  ]
+}

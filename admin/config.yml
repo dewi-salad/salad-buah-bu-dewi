@@ -1,0 +1,53 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/gallery"
+public_folder: "/images/gallery"
+
+locale: "id"
+
+collections:
+  - name: "site"
+    label: "Pengaturan Website"
+    files:
+      - name: "gallery"
+        label: "🖼️ Galeri Foto & Video"
+        file: "content/gallery.json"
+        fields:
+          - label: "Daftar Foto / Video"
+            name: "items"
+            widget: "list"
+            label_singular: "Item Galeri"
+            summary: "{{fields.caption}}"
+            fields:
+              - label: "Tipe"
+                name: "type"
+                widget: "select"
+                options: ["Foto", "Video"]
+                default: "Foto"
+              - label: "Upload Foto"
+                name: "image"
+                widget: "image"
+                required: false
+                hint: "Isi ini kalau Tipe = Foto"
+              - label: "Link Video (YouTube)"
+                name: "video_url"
+                widget: "string"
+                required: false
+                hint: "Isi ini kalau Tipe = Video. Tempel link YouTube-nya, contoh: https://youtu.be/xxxxx"
+              - label: "Keterangan Singkat"
+                name: "caption"
+                widget: "string"
+                required: false
+                hint: "Contoh: Cup salad buah 750ml siap antar"
+
+      - name: "settings"
+        label: "⚙️ Widget Instagram"
+        file: "content/settings.json"
+        fields:
+          - label: "Kode Embed Instagram"
+            name: "instagram_embed"
+            widget: "text"
+            required: false
+            hint: "Tempel kode embed dari SnapWidget/Elfsight di sini (lihat panduan di README-DEPLOY.md). Kosongkan kalau belum punya."
