@@ -19,6 +19,11 @@
       "type": "Foto",
       "image": "/images/gallery/hero4.jpg",
       "caption": "Salad buah kotak siap antar"
+    },
+    {
+      "type": "Foto",
+      "image": "/images/gallery/flyer-po-jumat21-selasa25-agustus2026.png",
+      "caption": "Foto PO"
     }
   ]
 }
