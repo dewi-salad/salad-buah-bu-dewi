@@ -1,0 +1,13 @@
+{
+  "section_title": "Info Terbaru PO",
+  "section_subtitle": "Jadwal PO dan kabar terbaru dari Salad Buah Bu Dewi.",
+  "items": [
+    {
+      "tag": "Info PO",
+      "date": "Setiap Selasa & Jumat",
+      "title": "PO dibuka setiap Selasa & Jumat",
+      "body": "Pesan lewat website ini atau langsung chat WhatsApp. Cup 200 ml minimal order 3 pax.",
+      "pinned": true
+    }
+  ]
+}

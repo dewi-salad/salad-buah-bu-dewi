@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "name": "Cup 200 ml",
+      "icon": "Cup",
+      "price": 18000,
+      "custom": false,
+      "note": "Pas untuk cemilan pribadi",
+      "min_qty": 3,
+      "color": "Merah",
+      "active": true
+    },
+    {
+      "name": "Cup 750 ml",
+      "icon": "Cup",
+      "price": 55000,
+      "custom": false,
+      "note": "Cocok berdua atau bertiga",
+      "min_qty": 1,
+      "color": "Oranye",
+      "active": true
+    },
+    {
+      "name": "Cup 1000 ml",
+      "icon": "Cup",
+      "price": 65000,
+      "custom": false,
+      "note": "Untuk keluarga kecil",
+      "min_qty": 1,
+      "color": "Hijau",
+      "active": true
+    },
+    {
+      "name": "Cup 2000 / 2500 / 3000 ml",
+      "icon": "Cup",
+      "price": 0,
+      "custom": true,
+      "note": "Untuk acara/arisan besar — harga & ketersediaan konfirmasi via WA",
+      "min_qty": 1,
+      "color": "Ungu",
+      "active": true
+    }
+  ]
+}
