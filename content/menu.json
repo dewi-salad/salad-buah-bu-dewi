@@ -21,8 +21,8 @@
       "active": true
     },
     {
-      "name": "Cup 1000 ml",
-      "icon": "Cup",
+      "name": "Box 1000 ml",
+      "icon": "Box",
       "price": 65000,
       "custom": false,
       "note": "Untuk keluarga kecil",
@@ -31,8 +31,8 @@
       "active": true
     },
     {
-      "name": "Cup 2000 / 2500 / 3000 ml",
-      "icon": "Cup",
+      "name": "Box 2000 / 2500 / 3000 ml",
+      "icon": "Box",
       "price": 0,
       "custom": true,
       "note": "Untuk acara/arisan besar — harga & ketersediaan konfirmasi via WA",
