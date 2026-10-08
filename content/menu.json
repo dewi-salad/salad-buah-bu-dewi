@@ -1,8 +1,8 @@
 {
   "items": [
     {
-      "name": "Cup 200 ml",
-      "icon": "Cup",
+      "name": "Box 200 ml",
+      "icon": "Box",
       "price": 18000,
       "custom": false,
       "note": "Pas untuk cemilan pribadi",
@@ -11,8 +11,8 @@
       "active": true
     },
     {
-      "name": "Cup 750 ml",
-      "icon": "Cup",
+      "name": "Box 650 ml",
+      "icon": "Box",
       "price": 55000,
       "custom": false,
       "note": "Cocok berdua atau bertiga",
