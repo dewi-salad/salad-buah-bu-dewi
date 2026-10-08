@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Salad Buah Bu Dewi — Segar, Lezat & Sehat</title>
-<link rel="icon" href="/images/logo.png">
+<link rel="icon" id="favicon" href="/images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -234,7 +234,7 @@
   /* ---------- MENU / CUP CARDS ---------- */
   .menu-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
     gap:20px;
   }
   .cup-card{
@@ -556,17 +556,48 @@
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important; scroll-behavior:auto !important;}
   }
+
+  /* ---------- v2: loading, news, dynamic menu ---------- */
+  body{transition:opacity .25s ease;}
+  body.loading{opacity:0;}
+  .news-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:18px;
+    max-width:980px;
+    margin:0 auto;
+  }
+  .news-card{
+    --accent:var(--strawberry);
+    background:#fff;
+    border-radius:var(--radius-md);
+    padding:20px 22px;
+    box-shadow:var(--shadow);
+    border:1px solid var(--line);
+    border-left:6px solid var(--accent);
+  }
+  .news-card.pinned{background:linear-gradient(160deg,#fff 55%,#FDECEF 100%);}
+  .news-meta{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin-bottom:10px;}
+  .news-tag{
+    font-size:.72rem; font-weight:700; color:#fff;
+    background:var(--accent);
+    padding:4px 10px; border-radius:999px; letter-spacing:.03em;
+  }
+  .news-date{font-size:.8rem; font-weight:600; color:var(--ink-soft);}
+  .news-card h3{font-size:1.25rem; color:var(--ink); line-height:1.2;}
+  .news-card p{margin:8px 0 0; color:var(--ink-soft); line-height:1.6; font-size:.95rem;}
 </style>
 </head>
-<body>
+<body class="loading">
+<noscript><style>body.loading{opacity:1;}</style></noscript>
 
 <header>
   <div class="nav">
     <div class="brand">
-      <img src="/images/logo.png" alt="Logo Salad Buah Bu Dewi">
+      <img id="brandLogo" src="/images/logo.png" alt="Logo Salad Buah Bu Dewi">
       <div>
-        <div class="brand-name">Salad Buah Bu Dewi</div>
-        <div class="brand-tag">Segar, Lezat &amp; Sehat!</div>
+        <div class="brand-name" id="brandName">Salad Buah Bu Dewi</div>
+        <div class="brand-tag" id="brandTag">Segar, Lezat &amp; Sehat!</div>
       </div>
     </div>
     <a class="nav-cta" href="#pesan">Pesan Sekarang</a>
@@ -576,29 +607,40 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow"><span class="fr">🍓</span> PO dibuka setiap Selasa &amp; Jumat — Tasikmalaya</div>
+      <div class="eyebrow"><span class="fr">🍓</span> <span id="heroBadge">PO dibuka setiap Selasa &amp; Jumat — Tasikmalaya</span></div>
       <div style="margin-bottom:22px; margin-top:-14px;">
-        <a href="https://instagram.com/dewi_salad" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; font-weight:700; color:var(--grape); text-decoration:none;">
+        <a id="heroIg" href="https://instagram.com/dewi_salad" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; font-size:0.82rem; font-weight:700; color:var(--grape); text-decoration:none;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/></svg>
-          @dewi_salad
+          <span id="heroIgText">@dewi_salad</span>
         </a>
       </div>
-      <h1>Salad buah segar,<br><span class="accent">dibuat</span> sepenuh <span class="accent2">hati</span>.</h1>
-      <p class="lede">Racikan buah pilihan, susu &amp; keju lembut dalam kemasan cup rapi. Cocok untuk cemilan harian, arisan, acara kantor, sampai hampers keluarga.</p>
+      <h1 id="heroTitle">Salad buah segar,<br><span class="accent">dibuat</span> sepenuh <span class="accent2">hati</span>.</h1>
+      <p class="lede" id="heroLede">Racikan buah pilihan, susu &amp; keju lembut dalam kemasan cup rapi. Cocok untuk cemilan harian, arisan, acara kantor, sampai hampers keluarga.</p>
       <div class="hero-ctas">
         <a class="btn-primary" href="#pesan">🛒 Pesan via WhatsApp</a>
         <a class="btn-secondary" href="#menu">Lihat Menu &amp; Harga</a>
       </div>
-      <div class="hero-stats">
+      <div class="hero-stats" id="heroStats">
         <div class="stat"><b>4 Ukuran</b><span>200ml – 3000ml</span></div>
         <div class="stat"><b>100% Segar</b><span>Dipotong harian</span></div>
         <div class="stat"><b>Custom Request</b><span>Pisah keju/mayones</span></div>
       </div>
     </div>
     <div class="hero-visual">
-      <div class="frame"><img src="/images/gallery/hero2.jpg" alt="Cup salad buah Bu Dewi tersusun rapi"></div>
-      <div class="badge">Made with Love 💜</div>
+      <div class="frame"><img id="heroImage" src="/images/gallery/hero2.jpg" alt="Salad buah Bu Dewi tersusun rapi"></div>
+      <div class="badge" id="heroRibbon">Made with Love 💜</div>
     </div>
+  </div>
+</section>
+
+<section class="section" id="info" hidden style="padding-bottom:0;">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:28px;">
+      <span class="kicker">Info Terbaru</span>
+      <h2 id="newsTitle">Info Terbaru PO</h2>
+      <p id="newsSub"></p>
+    </div>
+    <div class="news-grid" id="newsGrid"></div>
   </div>
 </section>
 
@@ -606,97 +648,35 @@
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">Menu &amp; Harga</span>
-      <h2>Pilih ukuran sesuai kebutuhanmu</h2>
-      <p>Semua ukuran pakai topping lengkap yang sama — beda cup, beda porsi kebahagiaan.</p>
+      <h2 id="menuHeading">Pilih ukuran sesuai kebutuhanmu</h2>
+      <p id="menuSub">Semua ukuran pakai topping lengkap yang sama — beda kemasan, beda porsi kebahagiaan.</p>
     </div>
-
-    <div class="menu-grid">
-      <!-- 200ml -->
-      <div class="cup-card">
-        <svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10 14 L46 14 L41 60 Q28 66 15 60 Z" fill="#FFFFFF" stroke="#E0435A" stroke-width="2.5"/>
-          <path d="M12 30 L44 30 L41 60 Q28 66 15 60 Z" fill="#E0435A" fill-opacity="0.18"/>
-          <ellipse cx="28" cy="14" rx="18" ry="4" fill="none" stroke="#E0435A" stroke-width="2.5"/>
-        </svg>
-        <div class="cup-vol">Cup 200 ml</div>
-        <div class="cup-price">Rp18<small>rb</small></div>
-        <div class="cup-note">Pas untuk cemilan pribadi<br><b style="color:var(--strawberry);">Min. order 3 pax</b></div>
-        <button class="cup-select" data-size="Cup 200ml" data-price="18000">Pilih</button>
-      </div>
-
-      <!-- 750ml -->
-      <div class="cup-card">
-        <svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7 8 L49 8 L43 62 Q28 68 13 62 Z" fill="#FFFFFF" stroke="#F2A63D" stroke-width="2.5"/>
-          <path d="M9 20 L47 20 L43 62 Q28 68 13 62 Z" fill="#F2A63D" fill-opacity="0.2"/>
-          <ellipse cx="28" cy="8" rx="21" ry="4.5" fill="none" stroke="#F2A63D" stroke-width="2.5"/>
-        </svg>
-        <div class="cup-vol">Cup 750 ml</div>
-        <div class="cup-price">Rp55<small>rb</small></div>
-        <div class="cup-note">Cocok berdua atau bertiga</div>
-        <button class="cup-select" data-size="Cup 750ml" data-price="55000">Pilih</button>
-      </div>
-
-      <!-- 1000ml -->
-      <div class="cup-card">
-        <svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M5 5 L51 5 L44 63 Q28 70 12 63 Z" fill="#FFFFFF" stroke="#5E9A46" stroke-width="2.5"/>
-          <path d="M7 16 L49 16 L44 63 Q28 70 12 63 Z" fill="#5E9A46" fill-opacity="0.2"/>
-          <ellipse cx="28" cy="5" rx="23" ry="5" fill="none" stroke="#5E9A46" stroke-width="2.5"/>
-        </svg>
-        <div class="cup-vol">Cup 1000 ml</div>
-        <div class="cup-price">Rp65<small>rb</small></div>
-        <div class="cup-note">Untuk keluarga kecil</div>
-        <button class="cup-select" data-size="Cup 1000ml" data-price="65000">Pilih</button>
-      </div>
-
-      <!-- Custom -->
-      <div class="cup-card custom">
-        <svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3 3 L53 3 L45 65 Q28 72 11 65 Z" fill="#FFFFFF" stroke="#7B3F72" stroke-width="2.5"/>
-          <path d="M5 12 L51 12 L45 65 Q28 72 11 65 Z" fill="#7B3F72" fill-opacity="0.18"/>
-          <ellipse cx="28" cy="3" rx="25" ry="5.5" fill="none" stroke="#7B3F72" stroke-width="2.5"/>
-        </svg>
-        <div class="cup-vol">Cup 2000 / 2500 / 3000 ml</div>
-        <div class="cup-price" style="font-size:1.1rem;">Orderan Khusus</div>
-        <div class="cup-note">Untuk acara/arisan besar — harga &amp; ketersediaan konfirmasi via WA</div>
-        <button class="cup-select" data-size="Cup Custom (2000/2500/3000ml)" data-price="0">Tanya Harga</button>
-      </div>
+    <div class="menu-grid" id="menuGrid">
+      <p style="grid-column:1/-1; text-align:center; color:var(--ink-soft);">Memuat menu…</p>
     </div>
-
-    <div class="menu-footnote">
-      <b>Catatan:</b> Mau topping keju atau mayones dipisah (untuk member yang request khusus)? Bisa banget — harganya menyesuaikan, tinggal tulis di catatan pesanan atau chat langsung ke WhatsApp.<br><br>
-      <b>Cup 200 ml:</b> minimal order 3 pax.<br>
-      <b>Ongkos kirim:</b> Rp5.000 (dalam kota/dekat) — Rp10.000 (area lebih jauh).
-    </div>
+    <div class="menu-footnote" id="menuFootnote"></div>
   </div>
 </section>
 
-<section class="section" style="padding-top:0;">
+<section class="section" style="padding-top:0;" id="galleryBlock">
   <div class="wrap">
     <div class="section-head">
       <span class="kicker">Galeri</span>
-      <h2>Segar &amp; cantik, siap difoto sebelum disantap 📸</h2>
+      <h2 id="galleryHeading">Segar &amp; cantik, siap difoto sebelum disantap 📸</h2>
     </div>
     <div class="carousel" id="carousel">
       <div class="carousel-viewport">
-        <div class="carousel-track" id="carouselTrack">
-          <div class="carousel-slide"><img src="/images/gallery/hero1.jpg" alt="Cup salad buah dengan topping strawberry, anggur, dan mangga"></div>
-          <div class="carousel-slide"><img src="/images/gallery/hero2.jpg" alt="Cup salad buah tersusun di atas meja kayu"></div>
-          <div class="carousel-slide"><img src="/images/gallery/hero3.jpg" alt="Salad buah kotak dengan hiasan buah kiwi dan anggur"></div>
-          <div class="carousel-slide"><img src="/images/gallery/hero4.jpg" alt="Salad buah kotak siap antar"></div>
-        </div>
+        <div class="carousel-track" id="carouselTrack"></div>
       </div>
       <button class="carousel-btn prev" id="carouselPrev" aria-label="Sebelumnya">‹</button>
       <button class="carousel-btn next" id="carouselNext" aria-label="Selanjutnya">›</button>
       <div class="carousel-dots" id="carouselDots"></div>
     </div>
     <div style="text-align:center; margin-top:18px;">
-      <a href="https://instagram.com/dewi_salad" target="_blank" rel="noopener" style="font-size:0.88rem; font-weight:700; color:var(--grape); text-decoration:none;">
+      <a id="galleryIg" href="https://instagram.com/dewi_salad" target="_blank" rel="noopener" style="font-size:0.88rem; font-weight:700; color:var(--grape); text-decoration:none;">
         Lihat lebih banyak di Instagram @dewi_salad →
       </a>
     </div>
-
     <div id="igWidgetContainer" style="margin-top:32px;"></div>
   </div>
 </section>
@@ -705,14 +685,14 @@
   <div class="wrap">
     <div class="order-panel">
       <div class="order-copy">
-        <h2>Yuk, pesan hari ini!</h2>
-        <p>Pilih ukuran, tambahkan catatan kalau ada request khusus, lalu kirim langsung ke WhatsApp Bu Dewi. Gampang, cepat, nggak perlu app tambahan.</p>
-        <div class="mini-list">
-          <div><span class="ic">✅</span> Konfirmasi & pembayaran langsung via chat</div>
+        <h2 id="orderHeading">Yuk, pesan hari ini!</h2>
+        <p id="orderText">Pilih menu, tambahkan catatan kalau ada request khusus, lalu kirim langsung ke WhatsApp Bu Dewi. Gampang, cepat, nggak perlu app tambahan.</p>
+        <div class="mini-list" id="orderPoints">
+          <div><span class="ic">✅</span> Konfirmasi &amp; pembayaran langsung via chat</div>
           <div><span class="ic">🎉</span> Cocok untuk arisan, acara kantor &amp; gereja</div>
           <div><span class="ic">🧀</span> Bisa request topping dipisah</div>
         </div>
-        <div class="payment-box">
+        <div class="payment-box" id="paymentBox">
           <div class="payment-title">💳 Metode Pembayaran</div>
           <div class="payment-row"><span>Transfer BCA</span><b>0541018289</b></div>
           <div class="payment-sub">a.n. Suminto</div>
@@ -722,13 +702,8 @@
 
       <div class="order-form">
         <div class="field">
-          <label for="size">Ukuran Cup</label>
-          <select id="size">
-            <option value="Cup 200ml|18000">Cup 200 ml — Rp18.000</option>
-            <option value="Cup 750ml|55000">Cup 750 ml — Rp55.000</option>
-            <option value="Cup 1000ml|65000">Cup 1000 ml — Rp65.000</option>
-            <option value="Cup Custom (2000/2500/3000ml)|0">Cup 2000/2500/3000 ml — Orderan Khusus</option>
-          </select>
+          <label for="size">Pilih Menu</label>
+          <select id="size"></select>
         </div>
         <div class="field">
           <label>Jumlah</label>
@@ -744,9 +719,9 @@
         </div>
         <div class="order-summary">
           <span>Perkiraan total</span>
-          <b id="totalPrice">Rp18.000</b>
+          <b id="totalPrice">—</b>
         </div>
-        <div style="font-size:0.75rem; color:var(--ink-soft); margin-top:-10px; margin-bottom:16px;">*Belum termasuk ongkos kirim. Cup 200ml minimal 3 pax.</div>
+        <div id="orderNote" style="font-size:0.75rem; color:var(--ink-soft); margin-top:-10px; margin-bottom:16px;">*Belum termasuk ongkos kirim.</div>
         <button class="btn-wa" id="sendWa" type="button">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.3 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.8 1.2 3c.1.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.6.8.3 1.5.2 2-.1.6-.4 1.8-1.2 2.1-1.5.3-.3.3-.7.2-1z" fill="white"/>
           <path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.2-1.4c1.4.8 3.1 1.2 4.8 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3C4 14.9 3.6 13.4 3.6 12 3.6 7.4 7.4 3.6 12 3.6S20.4 7.4 20.4 12 16.6 20 12 20z" fill="white"/>
@@ -759,10 +734,10 @@
 </section>
 
 <footer>
-  <div class="fbrand">Salad Buah Bu Dewi</div>
-  <div>Segar, Lezat &amp; Sehat — Tasikmalaya</div>
-  <div style="margin-top:8px;">WhatsApp: <a class="wa-link" href="https://wa.me/6281396014767" target="_blank" rel="noopener">0813-9601-4767</a></div>
-  <div style="margin-top:6px;">Instagram: <a class="wa-link" href="https://instagram.com/dewi_salad" target="_blank" rel="noopener">@dewi_salad</a></div>
+  <div class="fbrand" id="footBrand">Salad Buah Bu Dewi</div>
+  <div id="footText">Segar, Lezat &amp; Sehat — Tasikmalaya</div>
+  <div style="margin-top:8px;">WhatsApp: <a class="wa-link" id="footWa" href="https://wa.me/6281396014767" target="_blank" rel="noopener">0813-9601-4767</a></div>
+  <div style="margin-top:6px;">Instagram: <a class="wa-link" id="footIg" href="https://instagram.com/dewi_salad" target="_blank" rel="noopener">@dewi_salad</a></div>
 </footer>
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -779,170 +754,268 @@
 </script>
 
 <script>
-  const WA_NUMBER = "6281396014767";
-  const sizeSelect = document.getElementById('size');
-  const qtyVal = document.getElementById('qtyVal');
-  const totalPrice = document.getElementById('totalPrice');
-  const notes = document.getElementById('notes');
-  let qty = 1;
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function nl2br(s){ return esc(s).replace(/\r?\n/g, '<br>'); }
+  function rp(n){ return 'Rp' + Number(n || 0).toLocaleString('id-ID'); }
+  function getJSON(u){ return fetch(u, {cache:'no-cache'}).then(function(r){ if(!r.ok) throw new Error(u); return r.json(); }); }
 
-  function getMinQty(){
-    return sizeSelect.value.startsWith('Cup 200ml') ? 3 : 1;
+  var COLORS = {Merah:'#E0435A', Oranye:'#F2A63D', Hijau:'#5E9A46', Ungu:'#7B3F72'};
+  var TAG_COLORS = {'Info PO':'#E0435A', 'Promo':'#F2A63D', 'Pengumuman':'#7B3F72'};
+  var CUPS = [
+    {o:'M10 14 L46 14 L41 60 Q28 66 15 60 Z', f:'M12 30 L44 30 L41 60 Q28 66 15 60 Z', e:[28,14,18,4]},
+    {o:'M7 8 L49 8 L43 62 Q28 68 13 62 Z',   f:'M9 20 L47 20 L43 62 Q28 68 13 62 Z',  e:[28,8,21,4.5]},
+    {o:'M5 5 L51 5 L44 63 Q28 70 12 63 Z',   f:'M7 16 L49 16 L44 63 Q28 70 12 63 Z',  e:[28,5,23,5]},
+    {o:'M3 3 L53 3 L45 65 Q28 72 11 65 Z',   f:'M5 12 L51 12 L45 65 Q28 72 11 65 Z',  e:[28,3,25,5.5]}
+  ];
+
+  var site = {};
+  var menu = [];
+  var qty = 1;
+  var waNumber = '6281396014767';
+  var igHandle = 'dewi_salad';
+
+  /* ---------- Info umum ---------- */
+  function applySite(s){
+    site = s || {};
+    function txt(id, v){ if(v != null && String(v).trim() !== '') $(id).textContent = v; }
+    txt('brandName', s.brand_name); txt('brandTag', s.tagline);
+    txt('footBrand', s.brand_name); txt('footText', s.footer_text || s.tagline);
+    txt('heroBadge', s.po_badge); txt('heroLede', s.hero_lede); txt('heroRibbon', s.hero_ribbon);
+    txt('menuHeading', s.menu_heading); txt('menuSub', s.menu_subheading);
+    txt('galleryHeading', s.gallery_heading);
+    txt('orderHeading', s.order_heading); txt('orderText', s.order_text);
+    if(s.brand_name || s.tagline) document.title = (s.brand_name || 'Salad Buah Bu Dewi') + (s.tagline ? ' — ' + s.tagline : '');
+    if(s.logo){ $('brandLogo').src = s.logo; $('favicon').href = s.logo; }
+    if(s.hero_image) $('heroImage').src = s.hero_image;
+
+    if(s.hero_title_1 || s.hero_title_2){
+      var l2 = String(s.hero_title_2 || '').trim().split(/\s+/).filter(Boolean);
+      var html = esc(s.hero_title_1 || '');
+      if(l2.length){
+        html += '<br>';
+        var last = l2.length > 1 ? l2[l2.length - 1] : null;
+        var parts = [];
+        parts.push('<span class="accent">' + esc(l2[0]) + '</span>');
+        for(var i = 1; i < l2.length - 1; i++) parts.push(esc(l2[i]));
+        if(last){
+          var m = last.match(/^(.*?)([.,!?…]*)$/);
+          parts.push('<span class="accent2">' + esc(m[1]) + '</span>' + esc(m[2]));
+        }
+        html += parts.join(' ');
+      }
+      $('heroTitle').innerHTML = html;
+    }
+
+    if(Array.isArray(s.hero_stats) && s.hero_stats.length){
+      $('heroStats').innerHTML = s.hero_stats.map(function(x){
+        return '<div class="stat"><b>' + esc(x.title) + '</b><span>' + esc(x.subtitle) + '</span></div>';
+      }).join('');
+    }
+    if(Array.isArray(s.order_points) && s.order_points.length){
+      $('orderPoints').innerHTML = s.order_points.map(function(x){
+        return '<div><span class="ic">' + esc(x.icon || '✅') + '</span> ' + esc(x.text) + '</div>';
+      }).join('');
+    }
+
+    if(s.whatsapp_number) waNumber = String(s.whatsapp_number).replace(/\D/g, '');
+    if(s.instagram_handle) igHandle = String(s.instagram_handle).replace(/^@/, '');
+    var waText = s.whatsapp_display || '0813-9601-4767';
+    $('footWa').href = 'https://wa.me/' + waNumber; $('footWa').textContent = waText;
+    var igUrl = 'https://instagram.com/' + igHandle;
+    $('heroIg').href = igUrl; $('heroIgText').textContent = '@' + igHandle;
+    $('galleryIg').href = igUrl; $('galleryIg').textContent = 'Lihat lebih banyak di Instagram @' + igHandle + ' →';
+    $('footIg').href = igUrl; $('footIg').textContent = '@' + igHandle;
+
+    var pay = '<div class="payment-title">💳 Metode Pembayaran</div>';
+    if(s.payment_bank_label || s.payment_bank_number){
+      pay += '<div class="payment-row"><span>' + esc(s.payment_bank_label) + '</span><b>' + esc(s.payment_bank_number) + '</b></div>';
+      if(s.payment_bank_owner) pay += '<div class="payment-sub">' + esc(s.payment_bank_owner) + '</div>';
+    }
+    if(s.payment_cod_label){
+      pay += '<div class="payment-row" style="margin-top:8px;"><span>' + esc(s.payment_cod_label) + '</span><b>' + esc(s.payment_cod_text) + '</b></div>';
+    }
+    if(s.payment_bank_label || s.payment_bank_number || s.payment_cod_label) $('paymentBox').innerHTML = pay;
   }
 
-  function formatRupiah(n){
-    return "Rp" + n.toLocaleString('id-ID');
+  /* ---------- Info terbaru ---------- */
+  function renderNews(n){
+    var items = ((n && n.items) || []).filter(function(i){ return i && (i.title || i.body); });
+    var section = $('info');
+    if(!items.length){ section.hidden = true; return; }
+    if(n.section_title) $('newsTitle').textContent = n.section_title;
+    $('newsSub').textContent = n.section_subtitle || '';
+    $('newsSub').style.display = n.section_subtitle ? '' : 'none';
+    var pinned = items.filter(function(i){ return i.pinned; });
+    var rest = items.filter(function(i){ return !i.pinned; });
+    $('newsGrid').innerHTML = pinned.concat(rest).map(function(i){
+      var tag = i.tag || 'Info PO';
+      var color = TAG_COLORS[tag] || TAG_COLORS['Info PO'];
+      return '<article class="news-card' + (i.pinned ? ' pinned' : '') + '" style="--accent:' + color + ';">' +
+        '<div class="news-meta"><span class="news-tag">' + esc(tag) + '</span>' +
+        (i.date ? '<span class="news-date">' + esc(i.date) + '</span>' : '') +
+        (i.pinned ? '<span title="Disematkan">📌</span>' : '') + '</div>' +
+        (i.title ? '<h3>' + esc(i.title) + '</h3>' : '') +
+        (i.body ? '<p>' + nl2br(i.body) + '</p>' : '') +
+        '</article>';
+    }).join('');
+    section.hidden = false;
   }
 
+  /* ---------- Menu ---------- */
+  function isCustom(it){ return !!it.custom || !(Number(it.price) > 0); }
+  function minQty(it){ return Math.max(1, parseInt(it.min_qty, 10) || 1); }
+  function sizeIndex(it, i){
+    var m = String(it.name || '').match(/(\d+)\s*ml/i);
+    if(m){ var v = parseInt(m[1], 10); return v <= 300 ? 0 : v <= 800 ? 1 : v <= 1200 ? 2 : 3; }
+    return Math.min(i, 3);
+  }
+  function iconSVG(it, i){
+    var c = COLORS[it.color] || COLORS.Merah;
+    if(it.icon === 'Box'){
+      return '<svg class="cup-svg" width="64" height="70" viewBox="0 0 64 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+        '<rect x="6" y="24" width="52" height="38" rx="7" fill="#fff" stroke="' + c + '" stroke-width="2.5"/>' +
+        '<rect x="8" y="36" width="48" height="24" rx="5" fill="' + c + '" fill-opacity="0.18"/>' +
+        '<rect x="3" y="14" width="58" height="13" rx="5" fill="#fff" stroke="' + c + '" stroke-width="2.5"/></svg>';
+    }
+    var p = CUPS[sizeIndex(it, i)];
+    return '<svg class="cup-svg" width="56" height="70" viewBox="0 0 56 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
+      '<path d="' + p.o + '" fill="#fff" stroke="' + c + '" stroke-width="2.5"/>' +
+      '<path d="' + p.f + '" fill="' + c + '" fill-opacity="0.19"/>' +
+      '<ellipse cx="' + p.e[0] + '" cy="' + p.e[1] + '" rx="' + p.e[2] + '" ry="' + p.e[3] + '" fill="none" stroke="' + c + '" stroke-width="2.5"/></svg>';
+  }
+  function priceHTML(it){
+    if(isCustom(it)) return '<div class="cup-price" style="font-size:1.1rem;">Orderan Khusus</div>';
+    var p = Number(it.price);
+    if(p >= 1000 && p % 1000 === 0) return '<div class="cup-price">Rp' + (p / 1000) + '<small>rb</small></div>';
+    return '<div class="cup-price">' + rp(p) + '</div>';
+  }
+
+  function renderMenu(items){
+    if(!items){
+      $('menuGrid').innerHTML = '<p style="grid-column:1/-1; text-align:center; color:var(--ink-soft);">Menu belum bisa dimuat. Silakan chat WhatsApp untuk info menu &amp; harga ya.</p>';
+      return;
+    }
+    menu = items.filter(function(it){ return it && it.name && it.active !== false; });
+    $('menuGrid').innerHTML = menu.map(function(it, i){
+      var min = minQty(it);
+      return '<div class="cup-card' + (isCustom(it) ? ' custom' : '') + '">' + iconSVG(it, i) +
+        '<div class="cup-vol">' + esc(it.name) + '</div>' + priceHTML(it) +
+        '<div class="cup-note">' + esc(it.note || '') +
+        (min > 1 ? (it.note ? '<br>' : '') + '<b style="color:var(--strawberry);">Min. order ' + min + ' pax</b>' : '') + '</div>' +
+        '<button class="cup-select" type="button" data-i="' + i + '">' + (isCustom(it) ? 'Tanya Harga' : 'Pilih') + '</button></div>';
+    }).join('');
+
+    $('size').innerHTML = menu.map(function(it, i){
+      return '<option value="' + i + '">' + esc(it.name) + ' — ' + (isCustom(it) ? 'Orderan Khusus' : rp(it.price)) + '</option>';
+    }).join('');
+
+    var foot = '';
+    if(site.menu_note) foot += '<b>Catatan:</b> ' + nl2br(site.menu_note) + '<br><br>';
+    menu.forEach(function(it){ if(minQty(it) > 1) foot += '<b>' + esc(it.name) + ':</b> minimal order ' + minQty(it) + ' pax.<br>'; });
+    if(site.shipping_info) foot += '<b>Ongkos kirim:</b> ' + esc(site.shipping_info);
+    $('menuFootnote').innerHTML = foot;
+    $('menuFootnote').style.display = foot ? '' : 'none';
+
+    var note = site.order_note || '*Belum termasuk ongkos kirim.';
+    menu.forEach(function(it){ if(minQty(it) > 1) note += ' ' + it.name + ' minimal ' + minQty(it) + ' pax.'; });
+    $('orderNote').textContent = note;
+
+    qty = 1;
+    updateTotal();
+  }
+
+  /* ---------- Form pesan ---------- */
+  var sizeSelect = $('size'), qtyVal = $('qtyVal'), totalPrice = $('totalPrice'), notes = $('notes');
+  function cur(){ return menu[parseInt(sizeSelect.value, 10)]; }
   function updateTotal(){
-    const min = getMinQty();
-    if(qty < min){
-      qty = min;
-      qtyVal.textContent = qty;
-    }
-    const [label, priceStr] = sizeSelect.value.split('|');
-    const price = parseInt(priceStr, 10);
-    if(price === 0){
-      totalPrice.textContent = "Konfirmasi via WA";
-    } else {
-      totalPrice.textContent = formatRupiah(price * qty);
-    }
+    var it = cur(), min = it ? minQty(it) : 1;
+    if(qty < min) qty = min;
+    qtyVal.textContent = qty;
+    totalPrice.textContent = !it ? '—' : (isCustom(it) ? 'Konfirmasi via WA' : rp(Number(it.price) * qty));
   }
-
-  document.getElementById('qtyPlus').addEventListener('click', () => {
-    qty = Math.min(qty + 1, 50);
-    qtyVal.textContent = qty;
+  $('qtyPlus').addEventListener('click', function(){ qty = Math.min(qty + 1, 50); updateTotal(); });
+  $('qtyMinus').addEventListener('click', function(){ var it = cur(); qty = Math.max(qty - 1, it ? minQty(it) : 1); updateTotal(); });
+  sizeSelect.addEventListener('change', function(){ var it = cur(); qty = it ? minQty(it) : 1; updateTotal(); });
+  $('menuGrid').addEventListener('click', function(e){
+    var b = e.target.closest('.cup-select'); if(!b) return;
+    sizeSelect.value = b.getAttribute('data-i');
+    var it = cur(); qty = it ? minQty(it) : 1;
     updateTotal();
+    $('pesan').scrollIntoView({behavior:'smooth', block:'center'});
   });
-  document.getElementById('qtyMinus').addEventListener('click', () => {
-    const min = getMinQty();
-    qty = Math.max(qty - 1, min);
-    qtyVal.textContent = qty;
-    updateTotal();
+  $('sendWa').addEventListener('click', function(){
+    var it = cur(), note = notes.value.trim();
+    var msg = (site.wa_greeting || 'Halo Bu Dewi, saya mau pesan:') + '\n';
+    if(it){ msg += '- Pesanan: ' + it.name + '\n- Jumlah: ' + qty + '\n'; }
+    if(note) msg += '- Catatan: ' + note + '\n';
+    msg += '\nMohon info ketersediaan & totalnya ya. Terima kasih!';
+    window.open('https://wa.me/' + waNumber + '?text=' + encodeURIComponent(msg), '_blank');
   });
-  sizeSelect.addEventListener('change', updateTotal);
 
-  // Cup card quick-select buttons scroll to order panel + set select
-  document.querySelectorAll('.cup-select').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const size = btn.getAttribute('data-size');
-      const price = btn.getAttribute('data-price');
-      for(const opt of sizeSelect.options){
-        if(opt.value.startsWith(size + "|")){
-          sizeSelect.value = opt.value;
-          break;
-        }
+  /* ---------- Galeri / carousel ---------- */
+  var track = $('carouselTrack'), dotsWrap = $('carouselDots');
+  var index = 0, slideCount = 0, timer;
+  function youtubeEmbedUrl(url){ var m = url.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([a-zA-Z0-9_-]{11})/); return 'https://www.youtube.com/embed/' + (m ? m[1] : ''); }
+  function goTo(i){
+    if(!slideCount) return;
+    index = (i + slideCount) % slideCount;
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    dotsWrap.querySelectorAll('.carousel-dot').forEach(function(d, di){ d.classList.toggle('active', di === index); });
+  }
+  function restart(){ clearInterval(timer); if(slideCount > 1 && !hasVideo) timer = setInterval(function(){ goTo(index + 1); }, 4500); }
+  var hasVideo = false;
+  function renderGallery(g){
+    var items = ((g && g.items) || []).filter(function(i){ return i && ((i.type === 'Video' && i.video_url) || i.image); });
+    if(!items.length){ $('galleryBlock').querySelector('.carousel').style.display = 'none'; return; }
+    hasVideo = items.some(function(i){ return i.type === 'Video' && i.video_url; });
+    track.innerHTML = ''; dotsWrap.innerHTML = '';
+    items.forEach(function(item, i){
+      var slide = document.createElement('div'); slide.className = 'carousel-slide';
+      if(item.type === 'Video' && item.video_url){
+        slide.innerHTML = /youtu\.?be/.test(item.video_url)
+          ? '<iframe src="' + esc(youtubeEmbedUrl(item.video_url)) + '" style="width:100%;height:100%;border:0;" allow="encrypted-media" allowfullscreen title="' + esc(item.caption || 'Video') + '"></iframe>'
+          : '<video src="' + esc(item.video_url) + '" controls style="width:100%;height:100%;object-fit:cover;"></video>';
+      } else {
+        slide.innerHTML = '<img src="' + esc(item.image) + '" alt="' + esc(item.caption || 'Salad Buah Bu Dewi') + '">';
       }
-      updateTotal();
-      document.getElementById('pesan').scrollIntoView({behavior:'smooth', block:'center'});
+      track.appendChild(slide);
+      var dot = document.createElement('button'); dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i + 1));
+      dot.addEventListener('click', function(){ goTo(i); restart(); });
+      dotsWrap.appendChild(dot);
     });
-  });
+    slideCount = items.length; index = 0; track.style.transform = 'translateX(0%)';
+    var single = slideCount < 2;
+    $('carouselPrev').style.display = single ? 'none' : ''; $('carouselNext').style.display = single ? 'none' : '';
+    restart();
+  }
+  $('carouselNext').addEventListener('click', function(){ goTo(index + 1); restart(); });
+  $('carouselPrev').addEventListener('click', function(){ goTo(index - 1); restart(); });
+  var startX = 0;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var d = e.changedTouches[0].clientX - startX;
+    if(Math.abs(d) > 40){ goTo(d < 0 ? index + 1 : index - 1); restart(); }
+  }, {passive:true});
 
-  document.getElementById('sendWa').addEventListener('click', () => {
-    const [label] = sizeSelect.value.split('|');
-    const note = notes.value.trim();
-    let msg = `Halo Bu Dewi, saya mau pesan:\n`;
-    msg += `- Ukuran: ${label}\n`;
-    msg += `- Jumlah: ${qty}\n`;
-    if(note){
-      msg += `- Catatan: ${note}\n`;
-    }
-    msg += `\nMohon info ketersediaan & totalnya ya. Terima kasih!`;
-    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
-  });
-
-  updateTotal();
-
-  // ---------- Carousel (dinamis dari content/gallery.json) ----------
-  (function(){
-    const track = document.getElementById('carouselTrack');
-    const dotsWrap = document.getElementById('carouselDots');
-    const prevBtn = document.getElementById('carouselPrev');
-    const nextBtn = document.getElementById('carouselNext');
-    let index = 0;
-    let autoplayTimer;
-    let slideCount = 0;
-
-    function youtubeEmbedUrl(url){
-      const m = url.match(/(?:youtu\.be\/|v=|embed\/)([a-zA-Z0-9_-]{11})/);
-      const id = m ? m[1] : '';
-      return `https://www.youtube.com/embed/${id}`;
-    }
-
-    function renderSlides(items){
-      track.innerHTML = '';
-      dotsWrap.innerHTML = '';
-      items.forEach((item, i) => {
-        const slide = document.createElement('div');
-        slide.className = 'carousel-slide';
-        if(item.type === 'Video' && item.video_url){
-          if(/youtu\.?be/.test(item.video_url)){
-            slide.innerHTML = `<iframe src="${youtubeEmbedUrl(item.video_url)}" style="width:100%;height:100%;border:0;" allow="autoplay; encrypted-media" allowfullscreen title="${item.caption||'Video Salad Buah Bu Dewi'}"></iframe>`;
-          } else {
-            slide.innerHTML = `<video src="${item.video_url}" controls style="width:100%;height:100%;object-fit:cover;"></video>`;
-          }
-        } else if(item.image){
-          slide.innerHTML = `<img src="${item.image}" alt="${item.caption || 'Salad Buah Bu Dewi'}">`;
-        }
-        track.appendChild(slide);
-
-        const dot = document.createElement('button');
-        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', 'Slide ' + (i+1));
-        dot.addEventListener('click', () => { goTo(i); resetAutoplay(); });
-        dotsWrap.appendChild(dot);
-      });
-      slideCount = items.length;
-      index = 0;
-      track.style.transform = 'translateX(0%)';
-    }
-
-    function goTo(i){
-      if(slideCount === 0) return;
-      index = (i + slideCount) % slideCount;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dotsWrap.querySelectorAll('.carousel-dot').forEach((d, di) => d.classList.toggle('active', di === index));
-    }
-    function next(){ goTo(index + 1); }
-    function prev(){ goTo(index - 1); }
-
-    nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
-    prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
-
-    let startX = 0;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
-    track.addEventListener('touchend', e => {
-      const diff = e.changedTouches[0].clientX - startX;
-      if(Math.abs(diff) > 40){
-        diff < 0 ? next() : prev();
-        resetAutoplay();
-      }
-    }, {passive:true});
-
-    function startAutoplay(){
-      clearInterval(autoplayTimer);
-      autoplayTimer = setInterval(next, 4500);
-    }
-    function resetAutoplay(){ startAutoplay(); }
-
-    fetch('content/gallery.json')
-      .then(r => r.json())
-      .then(data => {
-        renderSlides(data.items || []);
-        startAutoplay();
-      })
-      .catch(() => { startAutoplay(); }); // fallback: pakai slide statis yang sudah ada di HTML
-
-    fetch('content/settings.json')
-      .then(r => r.json())
-      .then(data => {
-        if(data.instagram_embed && data.instagram_embed.trim()){
-          document.getElementById('igWidgetContainer').innerHTML = data.instagram_embed;
-        }
-      })
-      .catch(() => {});
-  })();
+  /* ---------- Muat semua data ---------- */
+  function ok(r){ return r.status === 'fulfilled' ? r.value : null; }
+  Promise.allSettled([
+    getJSON('content/site.json'), getJSON('content/menu.json'), getJSON('content/news.json'),
+    getJSON('content/gallery.json'), getJSON('content/settings.json')
+  ]).then(function(res){
+    var s = ok(res[0]); if(s) applySite(s);
+    var m = ok(res[1]); renderMenu(m && Array.isArray(m.items) ? m.items : null);
+    var n = ok(res[2]); if(n) renderNews(n);
+    var g = ok(res[3]); if(g) renderGallery(g); else $('galleryBlock').querySelector('.carousel').style.display = 'none';
+    var st = ok(res[4]);
+    if(st && st.instagram_embed && st.instagram_embed.trim()) $('igWidgetContainer').innerHTML = st.instagram_embed;
+  }).then(function(){ document.body.classList.remove('loading'); });
+  setTimeout(function(){ document.body.classList.remove('loading'); }, 3000);
+})();
 </script>
 
 </body>
