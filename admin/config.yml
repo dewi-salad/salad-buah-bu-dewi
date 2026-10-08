@@ -10,7 +10,107 @@ locale: "id"
 collections:
   - name: "site"
     label: "Pengaturan Website"
+    editor:
+      preview: false
     files:
+      # ------------------------------------------------------------
+      - name: "news"
+        label: "📣 Info Terbaru PO"
+        file: "content/news.json"
+        fields:
+          - label: "Judul Bagian"
+            name: "section_title"
+            widget: "string"
+            default: "Info Terbaru PO"
+          - label: "Kalimat Pengantar (opsional)"
+            name: "section_subtitle"
+            widget: "string"
+            required: false
+          - label: "Daftar Info"
+            name: "items"
+            widget: "list"
+            label_singular: "Info"
+            summary: "{{fields.title}} ({{fields.date}})"
+            hint: "Klik 'Tambah Info' untuk menambah kabar baru. Hapus info yang sudah lewat. Kalau daftar dikosongkan, bagian ini otomatis hilang dari website."
+            required: false
+            fields:
+              - label: "Jenis"
+                name: "tag"
+                widget: "select"
+                options: ["Info PO", "Promo", "Pengumuman"]
+                default: "Info PO"
+              - label: "Tanggal / Waktu"
+                name: "date"
+                widget: "string"
+                required: false
+                hint: "Bebas ditulis. Contoh: Jumat, 21 Agustus 2026"
+              - label: "Judul"
+                name: "title"
+                widget: "string"
+              - label: "Isi Info"
+                name: "body"
+                widget: "text"
+                required: false
+              - label: "Sematkan di paling atas"
+                name: "pinned"
+                widget: "boolean"
+                default: false
+
+      # ------------------------------------------------------------
+      - name: "menu"
+        label: "🍽️ Menu & Harga"
+        file: "content/menu.json"
+        fields:
+          - label: "Daftar Menu"
+            name: "items"
+            widget: "list"
+            label_singular: "Menu"
+            summary: "{{fields.name}} — {{fields.price}}"
+            hint: "Ubah nama/harga langsung di sini, atau tambah menu baru. Urutan di sini = urutan di website."
+            fields:
+              - label: "Nama Menu"
+                name: "name"
+                widget: "string"
+                hint: "Contoh: Box 650 ml"
+              - label: "Bentuk Kemasan (menentukan gambar ikon)"
+                name: "icon"
+                widget: "select"
+                options: ["Cup", "Box"]
+                default: "Cup"
+              - label: "Harga (Rp)"
+                name: "price"
+                widget: "number"
+                value_type: "int"
+                min: 0
+                default: 0
+                required: false
+                hint: "Tulis angka saja tanpa titik. Contoh: 60000"
+              - label: "Orderan Khusus (harga ditanyakan via WhatsApp)"
+                name: "custom"
+                widget: "boolean"
+                default: false
+              - label: "Keterangan Singkat"
+                name: "note"
+                widget: "string"
+                required: false
+              - label: "Minimal Order (pax)"
+                name: "min_qty"
+                widget: "number"
+                value_type: "int"
+                min: 1
+                default: 1
+              - label: "Warna Kartu"
+                name: "color"
+                widget: "select"
+                options: ["Merah", "Oranye", "Hijau", "Ungu"]
+                default: "Merah"
+              - label: "Tampilkan di Website"
+                name: "active"
+                widget: "boolean"
+                default: true
+                hint: "Matikan kalau menu sedang habis/tidak dijual, tanpa perlu dihapus."
+
+      # ------------------------------------------------------------
       - name: "gallery"
         label: "🖼️ Galeri Foto & Video"
         file: "content/gallery.json"
@@ -42,12 +142,70 @@ collections:
                 required: false
                 hint: "Contoh: Cup salad buah 750ml siap antar"
 
+      # ------------------------------------------------------------
+      - name: "general"
+        label: "🏠 Teks & Info Umum Website"
+        file: "content/site.json"
+        fields:
+          - {label: "Nama Usaha", name: "brand_name", widget: "string"}
+          - {label: "Slogan", name: "tagline", widget: "string"}
+          - {label: "Logo", name: "logo", widget: "image", required: false}
+          - {label: "Teks Jadwal PO (di bagian atas)", name: "po_badge", widget: "string", hint: "Contoh: PO dibuka setiap Selasa & Jumat — Tasikmalaya"}
+          - {label: "Judul Utama - Baris 1", name: "hero_title_1", widget: "string"}
+          - label: "Judul Utama - Baris 2"
+            name: "hero_title_2"
+            widget: "string"
+            hint: "Kata pertama otomatis berwarna merah dan kata terakhir berwarna hijau."
+          - {label: "Kalimat Pengantar", name: "hero_lede", widget: "text"}
+          - {label: "Foto Utama (bagian atas)", name: "hero_image", widget: "image", required: false}
+          - {label: "Tulisan di Pita Foto Utama", name: "hero_ribbon", widget: "string", required: false}
+          - label: "Tiga Keunggulan (di bawah tombol)"
+            name: "hero_stats"
+            widget: "list"
+            label_singular: "Keunggulan"
+            summary: "{{fields.title}}"
+            required: false
+            fields:
+              - {label: "Judul", name: "title", widget: "string"}
+              - {label: "Keterangan", name: "subtitle", widget: "string"}
+          - label: "Nomor WhatsApp (untuk tombol pesan)"
+            name: "whatsapp_number"
+            widget: "string"
+            hint: "Awali dengan 62, tanpa +, spasi, atau strip. Contoh: 6281396014767"
+          - {label: "Nomor WhatsApp (tampilan)", name: "whatsapp_display", widget: "string", hint: "Contoh: 0813-9601-4767"}
+          - {label: "Username Instagram", name: "instagram_handle", widget: "string", hint: "Tanpa @. Contoh: dewi_salad"}
+          - {label: "Judul Bagian Menu", name: "menu_heading", widget: "string"}
+          - {label: "Kalimat di Bawah Judul Menu", name: "menu_subheading", widget: "string", required: false}
+          - {label: "Catatan di Bawah Menu", name: "menu_note", widget: "text", required: false}
+          - {label: "Ongkos Kirim", name: "shipping_info", widget: "string", required: false, hint: "Contoh: Rp5.000 (dalam kota/dekat) — Rp10.000 (area lebih jauh)."}
+          - {label: "Judul Bagian Galeri", name: "gallery_heading", widget: "string"}
+          - {label: "Judul Bagian Pesan", name: "order_heading", widget: "string"}
+          - {label: "Kalimat Bagian Pesan", name: "order_text", widget: "text"}
+          - label: "Poin-poin Bagian Pesan"
+            name: "order_points"
+            widget: "list"
+            label_singular: "Poin"
+            summary: "{{fields.text}}"
+            required: false
+            fields:
+              - {label: "Emoji", name: "icon", widget: "string", default: "✅"}
+              - {label: "Teks", name: "text", widget: "string"}
+          - {label: "Pembayaran - Nama Bank/Metode Transfer", name: "payment_bank_label", widget: "string", required: false, hint: "Contoh: Transfer BCA"}
+          - {label: "Pembayaran - Nomor Rekening", name: "payment_bank_number", widget: "string", required: false}
+          - {label: "Pembayaran - Atas Nama", name: "payment_bank_owner", widget: "string", required: false, hint: "Contoh: a.n. Suminto"}
+          - {label: "Pembayaran - Metode Lain", name: "payment_cod_label", widget: "string", required: false, hint: "Contoh: COD"}
+          - {label: "Pembayaran - Keterangan Metode Lain", name: "payment_cod_text", widget: "string", required: false, hint: "Contoh: Bayar di tempat"}
+          - {label: "Catatan di Bawah Total Harga", name: "order_note", widget: "string", required: false}
+          - {label: "Kalimat Pembuka Pesan WhatsApp", name: "wa_greeting", widget: "string", hint: "Contoh: Halo Bu Dewi, saya mau pesan:"}
+          - {label: "Teks di Bagian Paling Bawah", name: "footer_text", widget: "string", required: false}
+
+      # ------------------------------------------------------------
       - name: "settings"
-        label: "⚙️ Widget Instagram"
+        label: "📷 Widget Instagram"
         file: "content/settings.json"
         fields:
           - label: "Kode Embed Instagram"
             name: "instagram_embed"
             widget: "text"
             required: false
-            hint: "Tempel kode embed dari SnapWidget/Elfsight di sini (lihat panduan di README-DEPLOY.md). Kosongkan kalau belum punya."
+            hint: "Tempel kode embed dari SnapWidget/Elfsight di sini. Kosongkan kalau belum punya."
